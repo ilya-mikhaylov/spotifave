@@ -1,0 +1,66 @@
+<br>
+<h1 class="card-container" style="color: white"><b>Your Top 3 artists</b></h1>
+<div class="card-group card-container top3box">
+    {{#each top3artists}}
+    <div class="card">
+        <img src="{{this.image}}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title"><a class="link" href="{{this.link}}"><b>{{this.name}}</b></a></h5>
+<!--            <p class="card-text">777 times.</p>-->
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+<br>
+<h1 class="card-container" style="color: white"><b>Your Favourites</b></h1>
+<div class="card-deck card-container">
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">
+            <b>Top 20 Songs</b>
+            <button type="button" class="btn btn-outline-success btn-sm container-btn create-playlist-btn">Create playlist</button>
+        </div>
+        <ul class="list-group list-group-flush">
+            {{#each top50Songs}}
+            <li class="list-group-item">
+                <h5><a class="link" href="{{this.external_urls.spotify}}"><b>{{this.name}}</b></a></h5></h5>
+                <h6>{{#each this.artists}}
+                    {{#if @index}}/{{/if}}
+                    <a class="link" href="{{this.external_urls.spotify}}">{{this.name}}</a>
+                {{/each}}</h6>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">
+            <b>Top 20 Artists</b>
+<!--            <button type="button" class="btn btn-outline-success btn-sm container-btn">Create playlist</button>-->
+        </div>
+        <ul class="list-group list-group-flush">
+            {{#each topArtists}}
+                <li class="list-group-item">
+                    <h5><b><a class="link" href="{{this.external_urls.spotify}}">{{this.name}}</a></b></h5>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">
+            <b>Top 20 Albums</b>
+<!--            <button type="button" class="btn btn-outline-success btn-sm container-btn">Create playlist</button>-->
+        </div>
+        <ul class="list-group list-group-flush">
+            {{#each top50Songs}}
+                <li class="list-group-item">
+                    <h5><b>{{this.name}}</b></h5>
+                    <h6>{{#each this.artists}}
+                        {{#if @index}}/{{/if}}
+                        {{this.name}}
+                    {{/each}}</h6>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+</div>
+<script src="/javascripts/dashboard.js"></script>
