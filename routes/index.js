@@ -6,6 +6,7 @@ const SpotifyWebApi = require('spotify-web-api-node');
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
 const redirectUri = process.env.REDIRECT_URI;
+const scope = process.env.SCOPE;
 
 var request = require('request'); // "Request" library
 var cors = require('cors');
@@ -24,6 +25,11 @@ const spotifyApi = new SpotifyWebApi({
 //   res.render('index', { title: 'Welcome' });
 // });
 
+router.get('/', function(req, res, next) {
+  // res.render('index', { title: 'Super TV' });
+  res.redirect('/login')
+});
+
 var generateRandomString = function(length) {
   var text = '';
   var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -41,9 +47,9 @@ router.get('/login', function(req, res) {
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
 
+
   // your application requests authorization
   // var scope = 'user-read-private user-read-email';
-  const scope = 'ugc-image-upload user-read-playback-state user-modify-playback-state user-read-currently-playing streaming app-remote-control user-read-email user-read-private playlist-read-collaborative playlist-modify-public playlist-read-private playlist-modify-private user-library-modify user-library-read user-top-read user-read-recently-played user-follow-read user-follow-modify';
   res.redirect('https://accounts.spotify.com/authorize?' +
       querystring.stringify({
         response_type: 'code',
@@ -104,11 +110,12 @@ router.get('/callback', function(req, res) {
 
 
         // we can also pass the token to the browser to make requests from there
-        res.redirect('/#' +
-            querystring.stringify({
-              access_token: access_token,
-              refresh_token: refresh_token
-            }));
+        // res.redirect('/#' +
+        //     querystring.stringify({
+        //       access_token: access_token,
+        //       refresh_token: refresh_token
+        //     }));
+        res.redirect('/dashboard');
       } else {
         res.redirect('/#' +
             querystring.stringify({
@@ -199,7 +206,8 @@ router.get('/dashboard', async function(req, res) {
     })
   } catch(e) {
     console.log(e);
-    res.render('dashboard', {title: 'Dashboard', username: 'NULL'})
+    res.redirect('/login');
+    // res.render('dashboard', {title: 'Dashboard', username: 'NULL'})
   }
   // res.render('dashboard', {title: 'Dashboard', username: 'NULL'})
 });
