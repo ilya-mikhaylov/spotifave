@@ -5,7 +5,7 @@ const User = require('../models/user');
 const SpotifyWebApi = require('spotify-web-api-node');
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
-const redirectUri = 'http://localhost:3000/callback';
+const redirectUri = process.env.REDIRECT_URI;
 
 var request = require('request'); // "Request" library
 var cors = require('cors');
@@ -49,7 +49,7 @@ router.get('/login', function(req, res) {
         response_type: 'code',
         client_id: clientId,
         scope: scope,
-        redirect_uri: 'http://localhost:3000/callback',
+        redirect_uri: redirectUri,
         state: state
       }));
 });
@@ -74,7 +74,7 @@ router.get('/callback', function(req, res) {
       url: 'https://accounts.spotify.com/api/token',
       form: {
         code: code,
-        redirect_uri: 'http://localhost:3000/callback',
+        redirect_uri: redirectUri,
         grant_type: 'authorization_code'
       },
       headers: {
@@ -149,18 +149,18 @@ router.get('/dashboard', async function(req, res) {
     const favArtists = await spotifyApi.getMyTopArtists();
     const favouriteTracks = await spotifyApi.getMyTopTracks();
     const favouriteArtists = await spotifyApi.getMyTopArtists();
-    const userid = await user.body.id;
-    const newPlaylist = await spotifyApi.createPlaylist(userid, 'Your Top 20 by Spotifave');
-    const newPlaylistId = await newPlaylist.body.id;
-    const favTracksUris = function() {
-      let arr = [];
-        for (let song of favouriteTracks.body.items) {
-          arr.push(song.uri)
-        }
-      return arr;
-    };
-    // await console.log(favTracksUris());
-    await spotifyApi.addTracksToPlaylist(newPlaylistId, favTracksUris());
+    // const userid = await user.body.id;
+    // const newPlaylist = await spotifyApi.createPlaylist(userid, 'Your Top 20 by Spotifave');
+    // const newPlaylistId = await newPlaylist.body.id;
+    // const favTracksUris = function() {
+    //   let arr = [];
+    //     for (let song of favouriteTracks.body.items) {
+    //       arr.push(song.uri)
+    //     }
+    //   return arr;
+    // };
+    // // await console.log(favTracksUris());
+    // await spotifyApi.addTracksToPlaylist(newPlaylistId, favTracksUris());
     // await console.log(newPlaylist);
     // await console.log(favouriteTracks.body);
     // console.log('>>> FAVS');
@@ -205,7 +205,9 @@ router.get('/dashboard', async function(req, res) {
 });
 
 router.post('/dashboard', async (req, res) => {
+  const user = await spotifyApi.getMe();
   const userid = await user.body.id;
+  const favouriteTracks = await spotifyApi.getMyTopTracks({time_range: 'long_term', limit: 50, offset: 0});
   const newPlaylist = await spotifyApi.createPlaylist(userid, 'Your Top 20 by Spotifave');
   const newPlaylistId = await newPlaylist.body.id;
   const favTracksUris = function() {
