@@ -269,6 +269,16 @@ router.get('/profile', async function(req, res, next) {
   }
 });
 
+router.get('/logout', async function(req, res, next) {
+  try {
+    spotifyApi.resetAccessToken();
+    res.redirect('/');
+  } catch(e) {
+    res.redirect('/');
+  }
+});
+
+
 
 // router.get('/login', function(req, res, next) {
 //   res.render('login', { title: 'Login' });
