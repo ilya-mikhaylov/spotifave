@@ -4,12 +4,26 @@
 }
 
 body {
-  /*padding: 50px;*/
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.about-text {
+  font: 24px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: white;
+}
+
+.default-wallpaper {
+  /*padding: 50px;*/
+
   background-color: #000000;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg %3E%3Cpolygon fill='%23042203' points='1600 160 0 460 0 350 1600 50'/%3E%3Cpolygon fill='%23084407' points='1600 260 0 560 0 450 1600 150'/%3E%3Cpolygon fill='%230d660a' points='1600 360 0 660 0 550 1600 250'/%3E%3Cpolygon fill='%2311880e' points='1600 460 0 760 0 650 1600 350'/%3E%3Cpolygon fill='%2315aa11' points='1600 800 0 800 0 750 1600 450'/%3E%3C/g%3E%3C/svg%3E");
   background-attachment: fixed;
   background-size: cover;
+}
+
+.about-wallpaper {
+  background-color: #000000;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='30' viewBox='0 0 1000 120'%3E%3Cg fill='none' stroke='%230d360d' stroke-width='10' %3E%3Cpath d='M-500 75c0 0 125-30 250-30S0 75 0 75s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 45c0 0 125-30 250-30S0 45 0 45s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 105c0 0 125-30 250-30S0 105 0 105s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 15c0 0 125-30 250-30S0 15 0 15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500-15c0 0 125-30 250-30S0-15 0-15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 135c0 0 125-30 250-30S0 135 0 135s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 a {
@@ -80,3 +94,23 @@ a {
 .genre-link:hover {
   color: green;
 }
+
+.white-link {
+  color: #155724;
+}
+
+.white-link:hover {
+  color: darkgrey;
+}
+
+.repo-link {
+  color: #FFFFFF;
+}
+
+.repo-link:hover {
+  color: darkgrey;
+}
+
+/*.about-carousel-header {*/
+/*  color: black;*/
+/*}*/

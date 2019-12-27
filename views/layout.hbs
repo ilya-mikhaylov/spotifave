@@ -6,7 +6,12 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
 <!--    <link href="http://allfont.net/allfont.css?fonts=cyrillicold" rel="stylesheet" type="text/css" />-->
   </head>
-  <body>
+  {{#if about}}
+      <body class="about-wallpaper">
+  {{else}}
+      <body class="default-wallpaper">
+  {{/if}}
+
   <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
       <a class="navbar-brand" href="/">Spotifave</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,19 +19,24 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav mr-auto">
+              {{#if about}}
               <li class="nav-item active">
-                  <a class="nav-link" href="/login">Authorize<span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="/login">Login with Spotify<span class="sr-only">(current)</span></a>
               </li>
+              {{else}}
               <li class="nav-item">
                   <a class="nav-link" href="/dashboard">Dashboard</a>
               </li>
+              {{/if}}
               <li class="nav-item">
-                  <a class="nav-link" href="/debug">Debug Info</a>
+                  <a class="nav-link" href="/about">About</a>
               </li>
           </ul>
+          {{#if logStatus}}
           <span class="navbar-text">
-      Logged as @{{username}} <img class="avatar" src="{{avatar}}" alt="AVATAR">
-    </span>
+              <a href="/profile">Logged as @{{username}} <img class="avatar" src="{{avatar}}" alt="..."></a>
+          </span>
+          {{/if}}
       </div>
   </nav>
     {{{body}}}

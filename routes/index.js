@@ -26,9 +26,13 @@ const spotifyApi = new SpotifyWebApi({
 // });
 
 router.get('/', function(req, res, next) {
-  // res.render('index', { title: 'Super TV' });
-  res.redirect('/login')
+  res.render('about', { title: 'Welcome', about: true});
 });
+
+// router.get('/', function(req, res, next) {
+//   // res.render('index', { title: 'Super TV' });
+//   res.redirect('/login')
+// });
 
 var generateRandomString = function(length) {
   var text = '';
@@ -223,6 +227,7 @@ router.get('/dashboard', async function(req, res) {
       top50Songs: renderData.top50Songs,
       topArtists: renderData.topArtists,
       mostFreqGenres: mostFreqGenres(),
+      logStatus: true,
     })
   } catch(e) {
     console.log(e);
@@ -248,6 +253,23 @@ router.post('/dashboard', async (req, res) => {
   await spotifyApi.addTracksToPlaylist(newPlaylistId, favTracksUris());
   await res.json({status: 'OK'})
 });
+
+router.get('/about', function(req, res, next) {
+  res.render('about', { title: 'About', about: true});
+});
+
+router.get('/profile', async function(req, res, next) {
+  try {
+    const user = await spotifyApi.getMe();
+    // await console.log(user.body)
+    res.render('profile', {title: 'Profile', user: user.body});
+  } catch(e) {
+    console.log(e);
+    res.render('profile', {title: 'Profile', error: true});
+  }
+});
+
+
 // router.get('/login', function(req, res, next) {
 //   res.render('login', { title: 'Login' });
 // });

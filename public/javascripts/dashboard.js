@@ -11,7 +11,8 @@ const createPlaylistButton = document.querySelector('.create-playlist-btn');
         }).then(data =>  {
             if(data) {
                 alert('Playlist created');
-                redirect: window.location.replace("/")
+                // redirect: window.location.replace("/")
+                window.location;
             } else{
                 alert("Ошибочка");
             }
