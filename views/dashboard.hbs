@@ -16,6 +16,16 @@
 </div>
 
 <br>
+<h1 class="card-container" style="color: white"><b>Top Genres</b></h1>
+<div class="card-container">
+<ul class="list-group list-group-horizontal-xl">
+    {{#each mostFreqGenres}}
+        <li class="list-group-item list-group-item-success" style=""><a class="genre-link" href="https://www.last.fm/tag/{{this}}">{{this}}</a></li>
+    {{/each}}
+</ul>
+</div>
+<br>
+
 <h1 class="card-container" style="color: white"><b>Your Favourites</b></h1>
 <div class="card-deck card-container">
     <div class="card" style="width: 18rem;">
@@ -26,11 +36,17 @@
         <ul class="list-group list-group-flush">
             {{#each top50Songs}}
             <li class="list-group-item">
+                <div class="song-container">
+                <div class="artwork"><a href="{{this.album.external_urls.spotify}}"><img class="rounded" src="{{this.album.images.2.url}}"></a></div>
+                <div class="song-info">
                 <h5><a class="link" href="{{this.external_urls.spotify}}"><b>{{this.name}}</b></a></h5></h5>
                 <h6>{{#each this.artists}}
                     {{#if @index}}/{{/if}}
                     <a class="link" href="{{this.external_urls.spotify}}">{{this.name}}</a>
                 {{/each}}</h6>
+                <h6><a style="font-style: italic; font-size: smaller" class="link" href="{{this.album.external_urls.spotify}}">{{this.album.name}}</a></h6>
+                </div>
+                </div>
             </li>
             {{/each}}
         </ul>
@@ -43,27 +59,34 @@
         <ul class="list-group list-group-flush">
             {{#each topArtists}}
                 <li class="list-group-item">
+                        <img class="artist-list-image" src="{{this.images.0.url}}" class="card-img-top" alt="...">
                     <h5><b><a class="link" href="{{this.external_urls.spotify}}">{{this.name}}</a></b></h5>
+<!--                    <div class="card" style="width: 18rem;">-->
+<!--                        <img class="artist-list-image" src="{{this.images.0.url}}" class="card-img-top" alt="...">-->
+<!--                        <div class="card-body">-->
+<!--                            <h5 class="card-text"><b><a class="link" href="{{this.external_urls.spotify}}">{{this.name}}</a></b></h5>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </li>
             {{/each}}
         </ul>
     </div>
-    <div class="card" style="width: 18rem;">
-        <div class="card-header">
-            <b>Top 20 Albums</b>
+<!--    <div class="card" style="width: 18rem;">-->
+<!--        <div class="card-header">-->
+<!--            <b>Recommended Songs</b>-->
 <!--            <button type="button" class="btn btn-outline-success btn-sm container-btn">Create playlist</button>-->
-        </div>
-        <ul class="list-group list-group-flush">
-            {{#each top50Songs}}
-                <li class="list-group-item">
-                    <h5><b>{{this.name}}</b></h5>
-                    <h6>{{#each this.artists}}
-                        {{#if @index}}/{{/if}}
-                        {{this.name}}
-                    {{/each}}</h6>
-                </li>
-            {{/each}}
-        </ul>
-    </div>
+<!--        </div>-->
+<!--        <ul class="list-group list-group-flush">-->
+<!--            {{#each top50Songs}}-->
+<!--                <li class="list-group-item">-->
+<!--                    <h5><b>{{this.name}}</b></h5>-->
+<!--                    <h6>{{#each this.artists}}-->
+<!--                        {{#if @index}}/{{/if}}-->
+<!--                        {{this.name}}-->
+<!--                    {{/each}}</h6>-->
+<!--                </li>-->
+<!--            {{/each}}-->
+<!--        </ul>-->
+<!--    </div>-->
 </div>
 <script src="/javascripts/dashboard.js"></script>
