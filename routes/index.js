@@ -156,6 +156,23 @@ router.get('/dashboard', async function(req, res) {
     const favArtists = await spotifyApi.getMyTopArtists();
     const favouriteTracks = await spotifyApi.getMyTopTracks();
     const favouriteArtists = await spotifyApi.getMyTopArtists();
+    const genres = await favouriteArtists.body.items[0].genres;
+    await console.log(genres);
+    function mostFreqGenres() {
+      let arr = [];
+      for (let i of favouriteArtists.body.items) {
+        for (let j of i.genres) {
+          arr.push(j)
+        }
+      }
+      let counts = arr.reduce((a, c) => {
+        a[c] = (a[c] || 0) + 1;
+        return a;
+      }, {});
+      let maxCount = Math.max(...Object.values(counts));
+      return mostFrequent = Object.keys(counts).filter(k => counts[k] === maxCount);
+    }
+
     // const userid = await user.body.id;
     // const newPlaylist = await spotifyApi.createPlaylist(userid, 'Your Top 20 by Spotifave');
     // const newPlaylistId = await newPlaylist.body.id;
@@ -191,9 +208,11 @@ router.get('/dashboard', async function(req, res) {
         ],
       top50Songs: favouriteTracks.body.items,
       topArtists: favouriteArtists.body.items,
+      mostFreqGenres: mostFreqGenres(),
 
       // top3artistsImages: [await favArtists.body.items[0].images.url, await favArtists.body.items[1].images.url, await favArtists.body.items[2].images.url]
     };
+    // await console.log(favouriteArtists.body.items[0]);
     // await console.log(renderData.topArtists);
     // await console.log(renderData.top3artists);
     res.render('dashboard', {
@@ -203,6 +222,7 @@ router.get('/dashboard', async function(req, res) {
       top3artists: renderData.top3artists,
       top50Songs: renderData.top50Songs,
       topArtists: renderData.topArtists,
+      mostFreqGenres: mostFreqGenres(),
     })
   } catch(e) {
     console.log(e);

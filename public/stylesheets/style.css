@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Cyrillic;
+  src: url(/fonts/cyrillicold.ttf);
+}
+
 body {
   /*padding: 50px;*/
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -51,4 +56,27 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+}
+
+.song-container {
+  display: flex;
+  align-items: start;
+}
+
+.artwork {
+  align-items: baseline;
+  margin-right: 10px;
+}
+
+.artist-list-image {
+  box-sizing: border-box;
+  height: 200px;
+}
+
+.genre-link {
+  color: #155724
+}
+
+.genre-link:hover {
+  color: green;
 }
